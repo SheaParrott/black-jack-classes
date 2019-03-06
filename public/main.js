@@ -48,6 +48,14 @@ class Deck {
     return this.cards.pop()
   }
 }
+class Hand {
+  constructor() {
+    this.cards = []
+  }
+  takeCard(card) {
+    this.cards.push(card)
+  }
+}
 let TheDeck = new Deck()
 
 const main = () => {}
