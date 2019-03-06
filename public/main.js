@@ -44,6 +44,9 @@ class Deck {
       this.cards[otherIndex] = firstCard
     }
   }
+  deal() {
+    return this.cards.pop()
+  }
 }
 let TheDeck = new Deck()
 
