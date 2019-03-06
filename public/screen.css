@@ -10,3 +10,13 @@ body {
   background-image: linear-gradient(rgb(4, 75, 26), rgb(7, 99, 36));
   background-size: contain;
 }
+.logoCentering {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 90vh;
+}
+.logo {
+  width: 300px;
+}

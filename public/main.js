@@ -75,10 +75,11 @@ const newGame = () => {
   let deck = new Deck()
   let playerHand = new Hand()
   let dealerHand = new Hand()
+  console.log('newgame')
 }
 
 const main = () => {
-  newGame()
+  document.querySelector('.PlayGame').addEventListener('click', newGame)
 }
 
 document.addEventListener('DOMContentLoaded', main)
