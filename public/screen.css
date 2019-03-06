@@ -9,6 +9,9 @@ body {
   line-height: 0;
   background-image: linear-gradient(rgb(4, 75, 26), rgb(7, 99, 36));
   background-size: contain;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .logoCentering {
   display: flex;
@@ -19,4 +22,10 @@ body {
 }
 .logo {
   width: 300px;
+}
+footer {
+  display: flex;
+  justify-content: space-around;
+  background-color: black;
+  color: white;
 }

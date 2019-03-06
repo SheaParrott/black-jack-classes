@@ -68,14 +68,25 @@ class Hand {
   dealerShouldKeepTakingCards() {
     return this.totalValue() <= 17
   }
-  html() {}
+  html() {
+    console.log('html')
+  }
 }
-
+let isSplashPage = true
 const newGame = () => {
+  console.log('newgame')
+  if (isSplashPage) {
+    console.log(isSplashPage)
+    isSplashPage = false
+    console.log(isSplashPage)
+  }
   let deck = new Deck()
   let playerHand = new Hand()
+  for (let i = 2; i > 0; i--) {
+    playerHand.takeCard(deck.deal())
+  }
   let dealerHand = new Hand()
-  console.log('newgame')
+  dealerHand.takeCard(deck.deal())
 }
 
 const main = () => {
