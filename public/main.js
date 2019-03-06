@@ -55,6 +55,12 @@ class Hand {
   takeCard(card) {
     this.cards.push(card)
   }
+  totalValue() {
+    let value = 0
+    this.cards.forEach(card => {
+      value += card.value
+    })
+  }
 }
 let TheDeck = new Deck()
 
