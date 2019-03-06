@@ -69,12 +69,29 @@ class Hand {
     return this.totalValue() <= 17
   }
   html() {
-    console.log('html')
+    // console.log('html')
+    if (this.cards.length === 1) {
+      console.log('dealer')
+    } else if (this.cards.length === 2) {
+      // this is the default HTML tag that we will append to
+      let HandHTML = document.querySelector('.game')
+      // we need a individual div for each hand to append to now
+      // with class added
+      let individualHand = document.createElement('div')
+      individualHand.classList.add('playerHand')
+      HandHTML.appendChild(individualHand)
+      console.log(HandHTML)
+      // this is the first element created
+      // everything else needs to be appended to the individual hand
+      let header = document.createElement('h4')
+      header.textContent = 'Player'
+      HandHTML.appendChild(header)
+    }
   }
 }
 let isSplashPage = true
 const newGame = () => {
-  console.log('newgame')
+  // console.log('newgame')
   if (isSplashPage) {
     console.log(isSplashPage)
     isSplashPage = false
@@ -85,8 +102,11 @@ const newGame = () => {
   for (let i = 2; i > 0; i--) {
     playerHand.takeCard(deck.deal())
   }
+  playerHand.html()
   let dealerHand = new Hand()
   dealerHand.takeCard(deck.deal())
+  dealerHand.html()
+  // console.log('new game html' + dealerHand.html())
 }
 
 const main = () => {
