@@ -69,7 +69,12 @@ class Hand {
     return this.totalValue() <= 17
   }
 }
-let TheDeck = new Deck()
+
+const newGame = () => {
+  let deck = new Deck()
+  let playerHand = new Hand()
+  let dealerHand = new Hand()
+}
 
 const main = () => {}
 
