@@ -60,6 +60,13 @@ class Hand {
     this.cards.forEach(card => {
       value += card.value
     })
+    return value
+  }
+  busted() {
+    return this.totalValue() > 21
+  }
+  dealerShouldKeepTakingCards() {
+    return this.totalValue() <= 17
   }
 }
 let TheDeck = new Deck()
