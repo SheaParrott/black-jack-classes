@@ -68,25 +68,44 @@ class Hand {
   dealerShouldKeepTakingCards() {
     return this.totalValue() <= 17
   }
-  html() {
-    // console.log('html')
+  StartGameHTML() {
+    // this is used to determine the name displayed on the dom and class
+    // name of either "Dealer" or "Player"
+    let playerOrDealer = this.cards.length === 1 ? 'Dealer' : 'Player'
+    // this is the default HTML tag that we will append to
+    let HandContainer = document.querySelector('.game')
+
+    // this is the first element created
+    // everything else needs to be appended to the individual hand
+    let PlayerOrDealerPlusTotal = document.createElement('h2')
+    PlayerOrDealerPlusTotal.textContent =
+      playerOrDealer + ' ' + `(${this.totalValue()})`
+    HandContainer.appendChild(PlayerOrDealerPlusTotal)
+    // we need a individual div for each hand to append to now
+    // with class added
+    let individualHand = document.createElement('div')
+    individualHand.classList.add(playerOrDealer)
+    HandContainer.appendChild(individualHand)
+
+    // let total = document.createElement('h4')
+    // total.textContent = `Total: ${this.totalValue()}`
+    // HandContainer.appendChild(total)
     if (this.cards.length === 1) {
-      console.log('dealer')
-    } else if (this.cards.length === 2) {
-      // this is the default HTML tag that we will append to
-      let HandHTML = document.querySelector('.game')
-      // we need a individual div for each hand to append to now
-      // with class added
-      let individualHand = document.createElement('div')
-      individualHand.classList.add('playerHand')
-      HandHTML.appendChild(individualHand)
-      console.log(HandHTML)
-      // this is the first element created
-      // everything else needs to be appended to the individual hand
-      let header = document.createElement('h4')
-      header.textContent = 'Player'
-      HandHTML.appendChild(header)
+      let displayedCard = document.createElement('img')
+      displayedCard.classList.add('card')
+      displayedCard.classList.add('backOfCard')
+      displayedCard.src = `./assets/backOfCard.png`
+      individualHand.appendChild(displayedCard)
     }
+    this.cards.forEach(card => {
+      // creating a image tag for each card in the hand and adding class name of "card"
+      console.log(card)
+      let displayedCard = document.createElement('img')
+      displayedCard.classList.add('card')
+      displayedCard.src = `./assets/${card.face}_of_${card.suit}.svg`
+      // 2_of_clubs.svg
+      individualHand.appendChild(displayedCard)
+    })
   }
 }
 let isSplashPage = true
@@ -98,15 +117,16 @@ const newGame = () => {
     console.log(isSplashPage)
   }
   let deck = new Deck()
+
+  let dealerHand = new Hand()
+  dealerHand.takeCard(deck.deal())
+  dealerHand.StartGameHTML()
+
   let playerHand = new Hand()
   for (let i = 2; i > 0; i--) {
     playerHand.takeCard(deck.deal())
   }
-  playerHand.html()
-  let dealerHand = new Hand()
-  dealerHand.takeCard(deck.deal())
-  dealerHand.html()
-  // console.log('new game html' + dealerHand.html())
+  playerHand.StartGameHTML()
 }
 
 const main = () => {
