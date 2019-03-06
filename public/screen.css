@@ -1,12 +1,12 @@
-:root {
-  font: 16px / 1 sans-serif;
-}
-
 html {
   height: 100%;
 }
 
 body {
   margin: 0;
-  min-height: 100%;
+  min-height: 100vh;
+  font: 16px / 1 sans-serif;
+  line-height: 0;
+  background-image: linear-gradient(rgb(4, 75, 26), rgb(7, 99, 36));
+  background-size: contain;
 }

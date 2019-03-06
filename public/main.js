@@ -68,6 +68,7 @@ class Hand {
   dealerShouldKeepTakingCards() {
     return this.totalValue() <= 17
   }
+  html() {}
 }
 
 const newGame = () => {
@@ -76,6 +77,8 @@ const newGame = () => {
   let dealerHand = new Hand()
 }
 
-const main = () => {}
+const main = () => {
+  newGame()
+}
 
 document.addEventListener('DOMContentLoaded', main)
