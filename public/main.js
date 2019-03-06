@@ -1,6 +1,7 @@
 class Deck {
   constructor() {
     this.cards = this.createDeck()
+    this.shuffle()
   }
   createDeck() {
     let deck = []
@@ -32,9 +33,19 @@ class Deck {
     }
     return deck
   }
+  shuffle() {
+    for (let index = 52 - 1; index > 1; index -= 1) {
+      let otherIndex = Math.floor(Math.random() * index)
+
+      let firstCard = this.cards[index]
+      let secondCard = this.cards[otherIndex]
+
+      this.cards[index] = secondCard
+      this.cards[otherIndex] = firstCard
+    }
+  }
 }
-let deck = new Deck()
-console.log(deck)
+let TheDeck = new Deck()
 
 const main = () => {}
 
