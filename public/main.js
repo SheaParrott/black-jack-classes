@@ -72,6 +72,7 @@ class Hand {
     // this is used to determine the name displayed on the dom and class
     // name of either "Dealer" or "Player"
     let playerOrDealer = this.cards.length === 1 ? 'Dealer' : 'Player'
+
     // this is the default HTML tag that we will append to
     let HandContainer = document.querySelector('.game')
 
@@ -99,7 +100,6 @@ class Hand {
     }
     this.cards.forEach(card => {
       // creating a image tag for each card in the hand and adding class name of "card"
-      console.log(card)
       let displayedCard = document.createElement('img')
       displayedCard.classList.add('card')
       displayedCard.src = `./assets/${card.face}_of_${card.suit}.svg`
@@ -110,18 +110,17 @@ class Hand {
 }
 let isSplashPage = true
 const newGame = () => {
-  // console.log('newgame')
+  document.querySelector('.game').innerHTML = ''
   if (isSplashPage) {
-    console.log(isSplashPage)
     isSplashPage = false
-    console.log(isSplashPage)
+    let splash = document.querySelector('.logoCentering')
+    splash.classList.add('hidden')
   }
   let deck = new Deck()
 
   let dealerHand = new Hand()
   dealerHand.takeCard(deck.deal())
   dealerHand.StartGameHTML()
-
   let playerHand = new Hand()
   for (let i = 2; i > 0; i--) {
     playerHand.takeCard(deck.deal())
