@@ -109,12 +109,24 @@ class Hand {
   }
 }
 let isSplashPage = true
+let isDisplayingGameButtons = false
 const newGame = () => {
   document.querySelector('.game').innerHTML = ''
   if (isSplashPage) {
     isSplashPage = false
     let splash = document.querySelector('.logoCentering')
     splash.classList.add('hidden')
+  }
+  if (!isDisplayingGameButtons) {
+    let names = ['hit', 'stay']
+    let buttonContainer = document.querySelector('.gameButtons')
+    names.forEach(button => {
+      console.log(button)
+      let gameButton = document.createElement('button')
+      gameButton.classList.add('gameButtons')
+      gameButton.textContent = button
+      buttonContainer.appendChild(gameButton)
+    })
   }
   let deck = new Deck()
 

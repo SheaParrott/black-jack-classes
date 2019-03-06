@@ -48,3 +48,8 @@ h2 {
 .hidden {
   display: none;
 }
+.gameButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
