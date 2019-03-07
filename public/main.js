@@ -2,6 +2,7 @@ let isSplashPage = true
 let DealerScoreValue = 0
 let PlayerScoreValue = 0
 let playerHand, dealerHand, deck
+let playAgain = 0
 
 class Deck {
   constructor() {
@@ -71,11 +72,38 @@ class Hand {
     return this.totalValue() > 21
   }
   dealerShouldKeepTakingCards() {
-    return this.totalValue() <= 17
+    let once = 0
+    let interval = null
+    let dealCard = function() {
+      if (dealerHand.totalValue() <= 17) {
+        let card = deck.deal()
+        dealerHand.takeCard(card)
+        let Hand = document.querySelector('div.Dealer')
+        if (once == 0) {
+          document.querySelector('img.backOfCard').classList.add('hidden')
+          once = +1
+        }
+        let displayedCard = document.createElement('img')
+        displayedCard.classList.add('card')
+        displayedCard.src = `./assets/${card.face}_of_${card.suit}.svg`
+
+        Hand.appendChild(displayedCard)
+
+        let total = document.querySelector('h2.Dealertotal')
+        total.textContent = 'Dealer' + ' ' + `(${dealerHand.totalValue()})`
+      } else {
+        clearInterval(interval)
+        whoWon()
+      }
+    }
+    interval = setInterval(dealCard, 600)
   }
   StartGameHTML() {
     // this is used to determine the name displayed on the dom and class
     // name of either "Dealer" or "Player"
+    if (playAgain > 1) {
+      document.querySelector('div.resetButton').classList.add('hidden')
+    }
     let playerOrDealer = this.cards.length === 1 ? 'Dealer' : 'Player'
 
     let scoreContainer = document.querySelector('.score')
@@ -123,11 +151,29 @@ class Hand {
     document.querySelector('div.gameButtons').classList.remove('hidden')
   }
 }
+const whoWon = () => {
+  let playerTotal = playerHand.totalValue()
+  let dealerTotal = dealerHand.totalValue()
+  console.log(playerTotal)
+  console.log(dealerTotal)
+  if (playerHand.busted() && !dealerHand.busted()) {
+    console.log('dealer wins')
+  } else if (!playerHand.busted() && dealerHand.busted()) {
+    console.log('player wins')
+  } else if (playerHand.busted() && dealerHand.busted()) {
+    console.log('everyone busted')
+  } else if (playerTotal > dealerTotal) {
+    console.log('player wins')
+  } else if (playerTotal < dealerTotal) {
+    console.log('dealer wins')
+  } else if (playerTotal === dealerTotal) {
+    console.log('tie')
+  }
+}
 const stayButton = () => {
-  // while (dealerHand.dealerShouldKeepTakingCards()) {
-  //   console.log(dealerHand.totalValue())
-  // }
-  // tryy
+  dealerHand.dealerShouldKeepTakingCards()
+  document.querySelector('div.gameButtons').classList.add('hidden')
+  document.querySelector('div.resetButton').classList.remove('hidden')
 }
 const hitButton = () => {
   if (playerHand.busted()) {
@@ -151,18 +197,20 @@ const hitButton = () => {
     DealerGameWon.textContent = `Dealer Won: ${DealerScoreValue}`
     document.querySelector('div.gameButtons').classList.add('hidden')
     document.querySelector('div.resetButton').classList.remove('hidden')
+    dealerHand.dealerShouldKeepTakingCards()
   } else {
     let newTotal = document.querySelector('h2.Playertotal')
     newTotal.textContent = 'Player' + ' ' + `(${playerHand.totalValue()})`
   }
 }
 const newGame = () => {
+  playAgain += 1
   document.querySelector('.game').innerHTML = ''
+  document.querySelector('.score').innerHTML = ''
   if (isSplashPage) {
     isSplashPage = false
     document.querySelector('.logoCentering').classList.add('hidden')
     document.querySelector('main').classList.add('logoCentering')
-    main()
   }
   deck = new Deck()
 
@@ -178,6 +226,7 @@ const newGame = () => {
 
 const main = () => {
   document.querySelector('.PlayGame').addEventListener('click', newGame)
+  document.querySelector('.RESET').addEventListener('click', newGame)
   document.querySelector('.HIT').addEventListener('click', hitButton)
   document.querySelector('.STAY').addEventListener('click', stayButton)
   document.querySelector('.Home').addEventListener('click', () => {
