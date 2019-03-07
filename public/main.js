@@ -1,3 +1,8 @@
+let isSplashPage = true
+let DealerScoreValue = 0
+let PlayerScoreValue = 0
+let playerHand, dealerHand, deck
+
 class Deck {
   constructor() {
     this.cards = this.createDeck()
@@ -73,12 +78,21 @@ class Hand {
     // name of either "Dealer" or "Player"
     let playerOrDealer = this.cards.length === 1 ? 'Dealer' : 'Player'
 
+    let scoreContainer = document.querySelector('.score')
+    let TheScore = document.createElement('h4')
+    TheScore.classList.add(`gamesWon${playerOrDealer}`)
+    TheScore.textContent = `${playerOrDealer} Won: ${
+      this.cards.length === 1 ? DealerScoreValue : PlayerScoreValue
+    }`
+    scoreContainer.appendChild(TheScore)
+
     // this is the default HTML tag that we will append to
     let HandContainer = document.querySelector('.game')
 
     // this is the first element created
     // everything else needs to be appended to the individual hand
     let PlayerOrDealerPlusTotal = document.createElement('h2')
+    PlayerOrDealerPlusTotal.classList.add(`${playerOrDealer}total`)
     PlayerOrDealerPlusTotal.textContent =
       playerOrDealer + ' ' + `(${this.totalValue()})`
     HandContainer.appendChild(PlayerOrDealerPlusTotal)
@@ -106,35 +120,47 @@ class Hand {
       // 2_of_clubs.svg
       individualHand.appendChild(displayedCard)
     })
+    document.querySelector('div.gameButtons').classList.remove('hidden')
   }
 }
-let isSplashPage = true
-let isDisplayingGameButtons = false
+const hitButton = () => {
+  let card = deck.deal()
+  playerHand.takeCard(card)
+  console.log(playerHand)
+  // creating a image tag for each card in the hand and adding class name of "card"
+  let displayedCard = document.createElement('img')
+  displayedCard.classList.add('card')
+  displayedCard.src = `./assets/${card.face}_of_${card.suit}.svg`
+  // 2_of_clubs.svg
+  document.querySelector('div.Player').appendChild(displayedCard)
+  // new total of players hand
+  if (playerHand.busted()) {
+    let newTotal = document.querySelector('h2.Playertotal')
+    newTotal.textContent = 'BUSTED!'
+    // increment dealer score and change the text value on the dom
+    DealerScoreValue += 1
+    let DealerGameWon = document.querySelector('h4.gamesWonDealer')
+    DealerGameWon.textContent = `Dealer Won: ${DealerScoreValue}`
+    console.log(DealerGameWon)
+  } else {
+    let newTotal = document.querySelector('h2.Playertotal')
+    newTotal.textContent = 'Player' + ' ' + `(${playerHand.totalValue()})`
+  }
+}
 const newGame = () => {
   document.querySelector('.game').innerHTML = ''
   if (isSplashPage) {
     isSplashPage = false
     document.querySelector('.logoCentering').classList.add('hidden')
-
     document.querySelector('main').classList.add('logoCentering')
+    main()
   }
-  if (!isDisplayingGameButtons) {
-    let names = ['HIT', 'STAY']
-    let buttonContainer = document.querySelector('.gameButtons')
-    names.forEach(button => {
-      console.log(button)
-      let gameButton = document.createElement('button')
-      gameButton.classList.add(button)
-      gameButton.textContent = button
-      buttonContainer.appendChild(gameButton)
-    })
-  }
-  let deck = new Deck()
+  deck = new Deck()
 
-  let dealerHand = new Hand()
+  dealerHand = new Hand()
   dealerHand.takeCard(deck.deal())
   dealerHand.StartGameHTML()
-  let playerHand = new Hand()
+  playerHand = new Hand()
   for (let i = 2; i > 0; i--) {
     playerHand.takeCard(deck.deal())
   }
@@ -143,7 +169,7 @@ const newGame = () => {
 
 const main = () => {
   document.querySelector('.PlayGame').addEventListener('click', newGame)
-  // document.querySelector('.HIT').addEventListener('click')
+  document.querySelector('.HIT').addEventListener('click', hitButton)
   // document.querySelector('.STAY').addEventListener('click')
   document.querySelector('.Home').addEventListener('click', () => {
     location.reload(true)
