@@ -123,13 +123,18 @@ class Hand {
     document.querySelector('div.gameButtons').classList.remove('hidden')
   }
 }
+const stayButton = () => {
+  // while (dealerHand.dealerShouldKeepTakingCards()) {
+  //   console.log(dealerHand.totalValue())
+  // }
+  // tryy
+}
 const hitButton = () => {
   if (playerHand.busted()) {
     return
   }
   let card = deck.deal()
   playerHand.takeCard(card)
-  console.log(playerHand)
   // creating a image tag for each card in the hand and adding class name of "card"
   let displayedCard = document.createElement('img')
   displayedCard.classList.add('card')
@@ -174,7 +179,7 @@ const newGame = () => {
 const main = () => {
   document.querySelector('.PlayGame').addEventListener('click', newGame)
   document.querySelector('.HIT').addEventListener('click', hitButton)
-  // document.querySelector('.STAY').addEventListener('click')
+  document.querySelector('.STAY').addEventListener('click', stayButton)
   document.querySelector('.Home').addEventListener('click', () => {
     location.reload(true)
   })
