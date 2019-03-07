@@ -158,6 +158,9 @@ const whoWon = () => {
   console.log(dealerTotal)
   if (playerHand.busted() && !dealerHand.busted()) {
     console.log('dealer wins')
+    DealerScoreValue += 1
+    let DealerGameWon = document.querySelector('h4.gamesWonDealer')
+    DealerGameWon.textContent = `Dealer Won: ${DealerScoreValue}`
   } else if (!playerHand.busted() && dealerHand.busted()) {
     console.log('player wins')
   } else if (playerHand.busted() && dealerHand.busted()) {
@@ -166,6 +169,9 @@ const whoWon = () => {
     console.log('player wins')
   } else if (playerTotal < dealerTotal) {
     console.log('dealer wins')
+    DealerScoreValue += 1
+    let DealerGameWon = document.querySelector('h4.gamesWonDealer')
+    DealerGameWon.textContent = `Dealer Won: ${DealerScoreValue}`
   } else if (playerTotal === dealerTotal) {
     console.log('tie')
   }
@@ -192,9 +198,6 @@ const hitButton = () => {
     let newTotal = document.querySelector('h2.Playertotal')
     newTotal.textContent = 'BUSTED!'
     // increment dealer score and change the text value on the dom
-    DealerScoreValue += 1
-    let DealerGameWon = document.querySelector('h4.gamesWonDealer')
-    DealerGameWon.textContent = `Dealer Won: ${DealerScoreValue}`
     document.querySelector('div.gameButtons').classList.add('hidden')
     document.querySelector('div.resetButton').classList.remove('hidden')
     dealerHand.dealerShouldKeepTakingCards()
