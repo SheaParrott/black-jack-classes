@@ -124,6 +124,9 @@ class Hand {
   }
 }
 const hitButton = () => {
+  if (playerHand.busted()) {
+    return
+  }
   let card = deck.deal()
   playerHand.takeCard(card)
   console.log(playerHand)
@@ -141,7 +144,8 @@ const hitButton = () => {
     DealerScoreValue += 1
     let DealerGameWon = document.querySelector('h4.gamesWonDealer')
     DealerGameWon.textContent = `Dealer Won: ${DealerScoreValue}`
-    console.log(DealerGameWon)
+    document.querySelector('div.gameButtons').classList.add('hidden')
+    document.querySelector('div.resetButton').classList.remove('hidden')
   } else {
     let newTotal = document.querySelector('h2.Playertotal')
     newTotal.textContent = 'Player' + ' ' + `(${playerHand.totalValue()})`

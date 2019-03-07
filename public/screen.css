@@ -53,14 +53,16 @@ h2 {
   width: 70px;
 }
 
-.gameButtons {
+.gameButtons,
+.resetButton {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .HIT,
 .STAY,
-.PlayGame {
+.PlayGame,
+.RESET {
   border-radius: 50%;
   border: 2px solid #d1bd62;
   background-color: #027494;
@@ -70,7 +72,8 @@ h2 {
 }
 .HIT:hover,
 .STAY:hover,
-.PlayGame:hover {
+.PlayGame:hover,
+.RESET:hover {
   border: 2px solid #d1bd62c2;
   background-color: #027494c2;
   color: #ffffffc2;
@@ -84,6 +87,9 @@ h2 {
 }
 .STAY {
   padding: 15px 8.3px;
+}
+.RESET {
+  padding: 26px 2px;
 }
 .white:hover {
   text-shadow: 0 0 5px white;
