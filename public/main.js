@@ -114,16 +114,17 @@ const newGame = () => {
   document.querySelector('.game').innerHTML = ''
   if (isSplashPage) {
     isSplashPage = false
-    let splash = document.querySelector('.logoCentering')
-    splash.classList.add('hidden')
+    document.querySelector('.logoCentering').classList.add('hidden')
+
+    document.querySelector('main').classList.add('logoCentering')
   }
   if (!isDisplayingGameButtons) {
-    let names = ['hit', 'stay']
+    let names = ['HIT', 'STAY']
     let buttonContainer = document.querySelector('.gameButtons')
     names.forEach(button => {
       console.log(button)
       let gameButton = document.createElement('button')
-      gameButton.classList.add('gameButtons')
+      gameButton.classList.add(button)
       gameButton.textContent = button
       buttonContainer.appendChild(gameButton)
     })
@@ -142,6 +143,11 @@ const newGame = () => {
 
 const main = () => {
   document.querySelector('.PlayGame').addEventListener('click', newGame)
+  // document.querySelector('.HIT').addEventListener('click')
+  // document.querySelector('.STAY').addEventListener('click')
+  document.querySelector('.Home').addEventListener('click', () => {
+    location.reload(true)
+  })
 }
 
 document.addEventListener('DOMContentLoaded', main)

@@ -19,10 +19,13 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 90vh;
+  height: 80vh;
 }
 .logo {
   width: 300px;
+}
+.score {
+  height: 50px;
 }
 .game {
   color: white;
@@ -38,6 +41,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 h2 {
   text-align: center;
@@ -52,4 +56,35 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.HIT,
+.STAY,
+.PlayGame {
+  border-radius: 50%;
+  border: 2px solid #d1bd62;
+  background-color: #027494;
+  color: #ffffff;
+  margin: 10px 7px;
+  outline: none;
+}
+.HIT:hover,
+.STAY:hover,
+.PlayGame:hover {
+  border: 2px solid #d1bd62c2;
+  background-color: #027494c2;
+  color: #ffffffc2;
+  cursor: pointer;
+}
+.PlayGame {
+  padding: 30px 9px;
+}
+.HIT {
+  padding: 15px 12.5px;
+}
+.STAY {
+  padding: 15px 8.3px;
+}
+.white:hover {
+  text-shadow: 0 0 5px white;
+  cursor: pointer;
 }
