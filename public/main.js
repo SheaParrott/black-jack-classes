@@ -130,9 +130,6 @@ class Hand {
     individualHand.classList.add(playerOrDealer)
     HandContainer.appendChild(individualHand)
 
-    // let total = document.createElement('h4')
-    // total.textContent = `Total: ${this.totalValue()}`
-    // HandContainer.appendChild(total)
     if (this.cards.length === 1) {
       let displayedCard = document.createElement('img')
       displayedCard.classList.add('card')
@@ -145,72 +142,53 @@ class Hand {
       let displayedCard = document.createElement('img')
       displayedCard.classList.add('card')
       displayedCard.src = `./assets/${card.face}_of_${card.suit}.svg`
-      // 2_of_clubs.svg
       individualHand.appendChild(displayedCard)
     })
     document.querySelector('div.gameButtons').classList.remove('hidden')
   }
 }
+const winnerHTML = who => {
+  let whoWonContainer = document.querySelector('.whoWon')
+  let whoWonElement = document.createElement('h4')
+  whoWonElement.textContent = who
+  whoWonContainer.appendChild(whoWonElement)
+}
+const incrementWinCount = who => {
+  switch (who) {
+    case 'Dealer':
+      DealerScoreValue += 1
+      let DealerGameWon = document.querySelector('h4.gamesWonDealer')
+      DealerGameWon.textContent = `Dealer Won: ${DealerScoreValue}`
+      break
+    case 'Player':
+      PlayerScoreValue += 1
+      let PlayerGameWon = document.querySelector('h4.gamesWonPlayer')
+      PlayerGameWon.textContent = `Player Won: ${PlayerScoreValue}`
+      break
+    default:
+      break
+  }
+}
+
 const whoWon = () => {
   let playerTotal = playerHand.totalValue()
   let dealerTotal = dealerHand.totalValue()
-  console.log(playerTotal)
-  console.log(dealerTotal)
   if (playerHand.busted() && !dealerHand.busted()) {
-    let whoWonContainer = document.querySelector('.whoWon')
-    let whoWonElement = document.createElement('h4')
-    whoWonElement.textContent = 'Dealer Wins!'
-    whoWonContainer.appendChild(whoWonElement)
-
-    DealerScoreValue += 1
-    let DealerGameWon = document.querySelector('h4.gamesWonDealer')
-    DealerGameWon.textContent = `Dealer Won: ${DealerScoreValue}`
-    console.log('dealer wins')
+    winnerHTML('Dealer Wins!')
+    incrementWinCount('Dealer')
   } else if (!playerHand.busted() && dealerHand.busted()) {
-    let whoWonContainer = document.querySelector('.whoWon')
-    let whoWonElement = document.createElement('h4')
-    whoWonElement.textContent = 'Player Wins!'
-    whoWonContainer.appendChild(whoWonElement)
-
-    PlayerScoreValue += 1
-    let PlayerGameWon = document.querySelector('h4.gamesWonPlayer')
-    PlayerGameWon.textContent = `Player Won: ${PlayerScoreValue}`
-
-    console.log('player wins')
+    winnerHTML('Player Wins!')
+    incrementWinCount('Player')
   } else if (playerHand.busted() && dealerHand.busted()) {
-    let whoWonContainer = document.querySelector('.whoWon')
-    let whoWonElement = document.createElement('h4')
-    whoWonElement.textContent = 'Everyone Busted!'
-    whoWonContainer.appendChild(whoWonElement)
-
-    console.log('Everyone Busted')
+    winnerHTML('Everyone Busted!')
   } else if (playerTotal > dealerTotal) {
-    let whoWonContainer = document.querySelector('.whoWon')
-    let whoWonElement = document.createElement('h4')
-    whoWonElement.textContent = 'Player Wins!'
-    whoWonContainer.appendChild(whoWonElement)
-
-    PlayerScoreValue += 1
-    let PlayerGameWon = document.querySelector('h4.gamesWonPlayer')
-    PlayerGameWon.textContent = `Player Won: ${PlayerScoreValue}`
-
-    console.log('player wins')
+    winnerHTML('Player Wins!')
+    incrementWinCount('Player')
   } else if (playerTotal < dealerTotal) {
-    let whoWonContainer = document.querySelector('.whoWon')
-    let whoWonElement = document.createElement('h4')
-    whoWonElement.textContent = 'Dealer Wins!'
-    whoWonContainer.appendChild(whoWonElement)
-    DealerScoreValue += 1
-    let DealerGameWon = document.querySelector('h4.gamesWonDealer')
-    DealerGameWon.textContent = `Dealer Won: ${DealerScoreValue}`
-    console.log('dealer wins')
+    winnerHTML('Dealer Wins!')
+    incrementWinCount('Dealer')
   } else if (playerTotal === dealerTotal) {
-    let whoWonContainer = document.querySelector('.whoWon')
-    let whoWonElement = document.createElement('h4')
-    whoWonElement.textContent = 'Tie!'
-    whoWonContainer.appendChild(whoWonElement)
-
-    console.log('Tie')
+    winnerHTML('Tie!')
   }
 }
 const stayButton = () => {
