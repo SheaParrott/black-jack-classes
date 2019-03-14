@@ -252,6 +252,7 @@ const newGame = () => {
     isSplashPage = false
     document.querySelector('.logoCentering').classList.add('hidden')
     document.querySelector('main').classList.add('logoCentering')
+    document.querySelector('main').classList.remove('hidden')
   }
   deck = new Deck()
 
@@ -264,15 +265,23 @@ const newGame = () => {
   }
   playerHand.StartGameHTML()
 }
+const Home = () => {
+  isSplashPage = true
+  DealerScoreValue = 0
+  PlayerScoreValue = 0
+  document.querySelector('.game').innerHTML = ''
+  document.querySelector('.score').innerHTML = ''
+  document.querySelector('.whoWon').innerHTML = ''
+  document.querySelector('.logoCentering').classList.remove('hidden')
+  document.querySelector('main').classList.add('hidden')
+}
 
 const main = () => {
   document.querySelector('.PlayGame').addEventListener('click', newGame)
   document.querySelector('.RESET').addEventListener('click', newGame)
   document.querySelector('.HIT').addEventListener('click', hitButton)
   document.querySelector('.STAY').addEventListener('click', stayButton)
-  document.querySelector('.Home').addEventListener('click', () => {
-    location.reload(true)
-  })
+  document.querySelector('.Home').addEventListener('click', Home)
 }
 
 document.addEventListener('DOMContentLoaded', main)
