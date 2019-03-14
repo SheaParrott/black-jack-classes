@@ -157,23 +157,60 @@ const whoWon = () => {
   console.log(playerTotal)
   console.log(dealerTotal)
   if (playerHand.busted() && !dealerHand.busted()) {
-    console.log('dealer wins')
+    let whoWonContainer = document.querySelector('.whoWon')
+    let whoWonElement = document.createElement('h4')
+    whoWonElement.textContent = 'Dealer Wins!'
+    whoWonContainer.appendChild(whoWonElement)
+
     DealerScoreValue += 1
     let DealerGameWon = document.querySelector('h4.gamesWonDealer')
     DealerGameWon.textContent = `Dealer Won: ${DealerScoreValue}`
+    console.log('dealer wins')
   } else if (!playerHand.busted() && dealerHand.busted()) {
+    let whoWonContainer = document.querySelector('.whoWon')
+    let whoWonElement = document.createElement('h4')
+    whoWonElement.textContent = 'Player Wins!'
+    whoWonContainer.appendChild(whoWonElement)
+
+    PlayerScoreValue += 1
+    let PlayerGameWon = document.querySelector('h4.gamesWonPlayer')
+    PlayerGameWon.textContent = `Player Won: ${PlayerScoreValue}`
+
     console.log('player wins')
   } else if (playerHand.busted() && dealerHand.busted()) {
-    console.log('everyone busted')
+    let whoWonContainer = document.querySelector('.whoWon')
+    let whoWonElement = document.createElement('h4')
+    whoWonElement.textContent = 'Everyone Busted!'
+    whoWonContainer.appendChild(whoWonElement)
+
+    console.log('Everyone Busted')
   } else if (playerTotal > dealerTotal) {
+    let whoWonContainer = document.querySelector('.whoWon')
+    let whoWonElement = document.createElement('h4')
+    whoWonElement.textContent = 'Player Wins!'
+    whoWonContainer.appendChild(whoWonElement)
+
+    PlayerScoreValue += 1
+    let PlayerGameWon = document.querySelector('h4.gamesWonPlayer')
+    PlayerGameWon.textContent = `Player Won: ${PlayerScoreValue}`
+
     console.log('player wins')
   } else if (playerTotal < dealerTotal) {
-    console.log('dealer wins')
+    let whoWonContainer = document.querySelector('.whoWon')
+    let whoWonElement = document.createElement('h4')
+    whoWonElement.textContent = 'Dealer Wins!'
+    whoWonContainer.appendChild(whoWonElement)
     DealerScoreValue += 1
     let DealerGameWon = document.querySelector('h4.gamesWonDealer')
     DealerGameWon.textContent = `Dealer Won: ${DealerScoreValue}`
+    console.log('dealer wins')
   } else if (playerTotal === dealerTotal) {
-    console.log('tie')
+    let whoWonContainer = document.querySelector('.whoWon')
+    let whoWonElement = document.createElement('h4')
+    whoWonElement.textContent = 'Tie!'
+    whoWonContainer.appendChild(whoWonElement)
+
+    console.log('Tie')
   }
 }
 const stayButton = () => {
@@ -210,6 +247,7 @@ const newGame = () => {
   playAgain += 1
   document.querySelector('.game').innerHTML = ''
   document.querySelector('.score').innerHTML = ''
+  document.querySelector('.whoWon').innerHTML = ''
   if (isSplashPage) {
     isSplashPage = false
     document.querySelector('.logoCentering').classList.add('hidden')

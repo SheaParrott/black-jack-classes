@@ -30,6 +30,12 @@ body {
   align-items: center;
   color: white;
 }
+.whoWon {
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  color: white;
+}
 .game {
   color: white;
 }
