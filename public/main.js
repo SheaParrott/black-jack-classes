@@ -96,7 +96,7 @@ class Hand {
         whoWon()
       }
     }
-    interval = setInterval(dealCard, 600)
+    interval = setInterval(dealCard, 700)
   }
   StartGameHTML() {
     // this is used to determine the name displayed on the dom and class
