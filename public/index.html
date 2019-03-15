@@ -8,34 +8,41 @@
   </head>
 
   <body>
-    <div class="logoCentering">
-      <img class="logo" src="assets/blackjack_logo.png" alt="blackjack-logo" />
-      <button class="PlayGame">PLAY GAME</button>
+    <div class="biggestView">
+      <div class="logoCentering">
+        <img
+          class="logo"
+          src="assets/blackjack_logo.png"
+          alt="blackjack-logo"
+        />
+        <button class="PlayGame">PLAY GAME</button>
+      </div>
+      <div class="score"></div>
+
+      <main>
+        <div class="whoWon"></div>
+        <div class="game "></div>
+        <div class="gameButtons hidden">
+          <button class="HIT">HIT</button>
+          <button class="STAY">STAY</button>
+        </div>
+        <div class="gameButtons hidden">
+          <button class="HIT">HIT</button>
+          <button class="STAY">STAY</button>
+        </div>
+        <div class="resetButton hidden">
+          <button class="RESET">NEW GAME?</button>
+        </div>
+      </main>
+
+      <footer>
+        <p class="Home white">Home</p>
+        <p class="footer">
+          &copy;SheaParrott
+        </p>
+      </footer>
+
+      <script src="/main.js" charset="utf-8"></script>
     </div>
-    <div class="score"></div>
-    <div class="whoWon"></div>
-    <main>
-      <div class="game "></div>
-      <div class="gameButtons hidden">
-        <button class="HIT">HIT</button>
-        <button class="STAY">STAY</button>
-      </div>
-      <div class="gameButtons hidden">
-        <button class="HIT">HIT</button>
-        <button class="STAY">STAY</button>
-      </div>
-      <div class="resetButton hidden">
-        <button class="RESET">NEW GAME?</button>
-      </div>
-    </main>
-
-    <footer>
-      <p class="Home white">Home</p>
-      <p class="footer">
-        &copy;SheaParrott
-      </p>
-    </footer>
-
-    <script src="/main.js" charset="utf-8"></script>
   </body>
 </html>

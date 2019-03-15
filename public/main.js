@@ -107,7 +107,7 @@ class Hand {
     let playerOrDealer = this.cards.length === 1 ? 'Dealer' : 'Player'
 
     let scoreContainer = document.querySelector('.score')
-    let TheScore = document.createElement('h4')
+    let TheScore = document.createElement('h3')
     TheScore.classList.add(`gamesWon${playerOrDealer}`)
     TheScore.textContent = `${playerOrDealer} Won: ${
       this.cards.length === 1 ? DealerScoreValue : PlayerScoreValue
@@ -149,7 +149,7 @@ class Hand {
 }
 const winnerHTML = who => {
   let whoWonContainer = document.querySelector('.whoWon')
-  let whoWonElement = document.createElement('h4')
+  let whoWonElement = document.createElement('h1')
   whoWonElement.textContent = who
   whoWonContainer.appendChild(whoWonElement)
 }
@@ -157,12 +157,12 @@ const incrementWinCount = who => {
   switch (who) {
     case 'Dealer':
       DealerScoreValue += 1
-      let DealerGameWon = document.querySelector('h4.gamesWonDealer')
+      let DealerGameWon = document.querySelector('h3.gamesWonDealer')
       DealerGameWon.textContent = `Dealer Won: ${DealerScoreValue}`
       break
     case 'Player':
       PlayerScoreValue += 1
-      let PlayerGameWon = document.querySelector('h4.gamesWonPlayer')
+      let PlayerGameWon = document.querySelector('h3.gamesWonPlayer')
       PlayerGameWon.textContent = `Player Won: ${PlayerScoreValue}`
       break
     default:
